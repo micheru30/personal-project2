@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {connect} from 'react-redux';
-import {updateCart} from '../../dux/reducer';
+import { connect } from 'react-redux';
+import { updateCart } from '../../dux/reducer';
 
 
 class Home extends Component {
@@ -12,12 +12,14 @@ class Home extends Component {
     }
   }
   componentDidMount() {
-    axios.get('http://localhost:4000/api/items').then(res => this.setState({ items: res.data }))
+    axios.get('/api/items').then(res => this.setState({ items: res.data }))
+    axios.get('/api/user').then(console.log)
   }
-  handleAddToCart(item){
+  handleAddToCart(item) {
     this.props.updateCart(item)
   }
   render() {
+    console.log(this.state.items)
     return (
       <div className='Home'>
         <div className='landing-image'>
@@ -33,12 +35,11 @@ class Home extends Component {
             if (i === 2 || i === 3 || i === 4) {
               return (
                 <div className='indidual-item-component-frontpage' key={i}>
-                  <img className='item-default-image' src={item.item_image1} alt='image1' />
+                  <img className='item-default-image' src={item.item_image} alt='image1' />
                   <p className='frontpage-item-name'>{item.item_name}</p>
                   <p>{item.item_color}</p>
                   <p>${item.item_price}.00 USD</p>
-                  <button onClick={()=>this.handleAddToCart(item)}>Add To Cart</button>
-                  {console.log(item)}
+                  <button onClick={() => this.handleAddToCart(item)}>Add To Cart</button>
                 </div>
               )
             }
@@ -69,11 +70,13 @@ class Home extends Component {
         </div>
         <div className='fifth-image'>
           <div className='text-over-image5'>
-            <p className='student'>STUDENT</p>
-            <p className='discount'>DISCOUNT</p>
-            <p className='discount-explanation'>Get 10% off your order.</p>
-            <p className='discount-explanation'>with Studentbeans.</p>
-            <button className='read-more-button'>READ MORE</button>
+            <a className='bobs' href='https://www.gymshark.com/pages/studentbeans'>
+              <p className='student'>STUDENT</p>
+              <p className='discount'>DISCOUNT</p>
+              <p className='discount-explanation'>Get 10% off your order.</p>
+              <p className='discount-explanation'>with Studentbeans.</p>
+              <button className='read-more-button'>READ MORE</button>
+            </a>
           </div>
         </div>
         <div className='shop-instagram'>
@@ -98,4 +101,10 @@ class Home extends Component {
   }
 }
 
-export default connect(null,{updateCart})(Home)
+function mapStateToProps(state) {
+  return {
+    cart: state.cart
+  }
+}
+
+export default connect(mapStateToProps, { updateCart })(Home)

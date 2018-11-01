@@ -1,9 +1,10 @@
-.header{
+.header {
   display: flex;
   flex-direction: column;
-  padding-top: 55px;
-}
-.top-nav{
+  padding-top: 60px;
+  border-bottom: solid black .1px; }
+
+.top-nav {
   position: fixed;
   width: 100vw;
   display: flex;
@@ -12,80 +13,429 @@
   align-items: center;
   margin: 0;
   background-color: white;
-  z-index: 1000;
-}
-.notifications{
+  z-index: 1000; }
+
+.notifications {
   text-align: center;
   border-top: 1px solid grey;
   padding: 18px 0px;
-  background-clip: padding-box;
-}
-.logo{
+  background-clip: padding-box; }
+
+.logo {
   width: 45px;
-  padding-left: 60px
-}
-.clothing-nav{
+  padding-left: 60px; }
+
+.clothing-nav {
   list-style: none;
   margin-left: 130px;
   width: 300px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-}
-.nav-icons{
+  justify-content: space-between; }
+
+.mens-clothing-list {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 20px;
+  transition: .75s; }
+
+.mens-clothing-list a {
+  text-decoration: none;
+  color: inherit; }
+
+.mens-clothing-list:hover {
+  height: 85px; }
+
+.womens-clothing-list {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 20px;
+  transition: .75s; }
+
+.womens-clothing-list a {
+  text-decoration: none;
+  color: inherit; }
+
+.womens-clothing-list:hover {
+  height: 85px; }
+
+.accessories {
+  transition: .1s; }
+
+.accessories:hover {
+  text-decoration: underline;
+  font-weight: bold; }
+
+.accessories:active {
+  text-decoration: none;
+  font-weight: 100; }
+
+.nav-icons {
   display: flex;
   align-items: center;
-  padding-right: 50px
-}
-.search-input{
-  border: none;
-  width: 100px
-}
-.search-icon{
-  width: 20px;
-  padding: 0px 5px;
-}
-.account-icon{
-  width: 20px;
-  padding: 0px 5px;
-}
-.cart-icon{
-  width: 20px;
-  padding: 0px 5px;
-}
-.cart-counter{
-  width: 10px
-}
-.landing-image{
-background-image: url('https://cdn.shopify.com/s/files/1/0156/6146/files/Homepage_hero_1-min_341e69d8-3ffe-4537-a434-191b9aa80986.jpg?v=1538989284');
-background-position: center;
-background-size: cover;
-width: 100vw;
-height: 100vh;
+  padding-right: 50px; }
 
-}
-.text-over-image1{
+.search-input {
+  border: none;
+  width: 100px; }
+
+.search-icon {
+  width: 20px;
+  padding: 0px 5px; }
+
+.account-icon {
+  width: 20px;
+  padding: 0px 5px; }
+
+.cart-icon {
+  width: 20px;
+  padding: 0px 5px; }
+
+.cart-counter {
+  width: 10px; }
+
+.landing-image {
+  background-image: url("https://cdn.shopify.com/s/files/1/0156/6146/files/Homepage_hero_1-min_341e69d8-3ffe-4537-a434-191b9aa80986.jpg?v=1538989284");
+  background-position: center;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh; }
+
+.text-over-image1 {
   position: relative;
   color: white;
   top: 45%;
-  left: 3%
-}
-.better-together{
+  left: 3%; }
+
+.better-together {
   font-size: 30px;
   margin: 0px;
-  font-family: 'Roboto', sans-serif;
-}
-.item-default-image{
+  font-family: 'Roboto', sans-serif; }
+
+.item-default-image {
   width: 80%;
   margin: 0px;
-  padding: 0px;
-}
-.new-releases{
+  padding: 0px; }
+
+.new-releases {
   white-space: nowrap;
   font-size: 50px;
-  margin: 0px 2.5%;
-}
-.frontpage-item-component{
+  margin: 0px 2.5%; }
+
+.frontpage-item-component {
+  position: relative;
+  margin: 20px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  line-height: 80%;
+  font-size: 11px; }
+
+.frontpage-item-name {
+  font-weight: bold; }
+
+.explore-button {
+  width: 160px;
+  height: 50px;
+  border: none;
+  background-color: white; }
+
+.second-image {
+  background-image: url("https://cdn.shopify.com/s/files/1/0156/6146/files/Homepage_hero_2-min_6b95c665-7068-40a1-baf6-3ef98a5d038c.jpg?v=1538989447");
+  width: 100vw;
+  height: 100vh;
+  background-position: center;
+  background-size: cover; }
+
+.text-over-image2 {
+  position: relative;
+  color: white;
+  top: 45%;
+  right: 3%;
+  text-align: right; }
+
+.image2-small-text {
+  font-size: 13px; }
+
+.bold-text-over-image2 {
+  font-size: 30px;
+  margin: 0px;
+  font-family: 'Roboto', sans-serif; }
+
+.second-explore-button {
+  width: 160px;
+  height: 50px;
+  border: none;
+  background-color: white; }
+
+.third-and-fourth-images {
+  display: flex;
+  width: 100vw;
+  height: 77vh; }
+
+.third-image {
+  background-image: url("https://cdn.shopify.com/s/files/1/0156/6146/files/Homepage_half_hero_1-min_34a7c80a-713a-4e50-9b56-21b444e41e15_1440x.jpg?v=1538989729");
+  background-position: center;
+  background-size: cover;
+  width: 50%;
+  height: 100%; }
+
+.text-over-image3 {
+  position: relative;
+  text-align: right;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 20px;
+  top: 40%;
+  right: 5%; }
+
+.explore-mens {
+  width: 160px;
+  height: 50px;
+  background-color: black;
+  color: white;
+  border: none; }
+
+.fourth-image {
+  background-image: url("https://cdn.shopify.com/s/files/1/0156/6146/files/Homepage_half_hero_2-min_1440x.jpg?v=1538989744");
+  background-position: center;
+  background-size: cover;
+  width: 50%;
+  height: 100%; }
+
+.text-over-image4 {
+  position: relative;
+  top: 40%;
+  left: 5%;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 20px; }
+
+.explore-womens {
+  width: 160px;
+  height: 50px;
+  background-color: black;
+  color: white;
+  border: none; }
+
+.fifth-image {
+  background-image: url("https://cdn.shopify.com/s/files/1/0156/6146/files/Homepage_hero_3-min_60c90802-911a-4655-937e-e9510bc639a0.jpg?v=1538989835");
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw; }
+
+.text-over-image5 {
+  position: relative;
+  top: 43%;
+  left: 3%; }
+
+.text-over-image5 {
+  text-decoration: none; }
+
+.student {
+  font-size: 30px;
+  margin: 0px;
+  font-family: 'Roboto', sans-serif; }
+
+.discount {
+  font-size: 30px;
+  margin: 0px;
+  font-family: 'Roboto', sans-serif; }
+
+.discount-explanation {
+  line-height: 0;
+  font-size: 13px; }
+
+.read-more-button {
+  width: 160px;
+  height: 50px;
+  background-color: black;
+  color: white;
+  border: none; }
+
+.shop-instagram {
+  height: 60px;
+  width: 100vw; }
+
+.shop-instagram-text {
+  font-size: 50px;
+  line-height: 0px;
+  text-align: left; }
+
+.shop-instagram-photos {
+  width: 100vw;
+  height: 79vh;
+  display: flex; }
+
+.container1 {
+  width: 40%;
+  height: 100%; }
+
+.photo1 {
+  background-image: url("https://scontent.cdninstagram.com/vp/f7f7b6b7b78ea6f9fbfe992f8d648616/5C66499F/t51.2885-15/sh0.08/e35/p640x640/42893749_242951423050332_6805739268140742933_n.jpg");
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 100%; }
+
+.container2 {
+  display: flex;
+  flex-wrap: wrap;
+  width: 60%;
+  height: 100%; }
+
+.photo2 {
+  background-image: url("https://scontent.cdninstagram.com/vp/c7773b310b35b6451134f9d2cf3925fe/5C536698/t51.2885-15/sh0.08/e35/p640x640/43915392_340781143345895_3323663266761805928_n.jpg");
+  background-position: center;
+  background-size: cover;
+  width: 33%;
+  height: 50%; }
+
+.photo3 {
+  background-image: url("https://scontent.cdninstagram.com/vp/1300bb52a6fcd48fa5e298a40422507a/5C5A944A/t51.2885-15/sh0.08/e35/p640x640/43779274_589158944836352_6795270115839594390_n.jpg");
+  background-position: center;
+  background-size: cover;
+  width: 33%;
+  height: 50%; }
+
+.photo4 {
+  background-image: url("https://scontent.cdninstagram.com/vp/fefce65592674970664d576edccd426c/5C6600DF/t51.2885-15/sh0.08/e35/p640x640/43063025_154565878822575_6360210028140894310_n.jpg");
+  background-position: center;
+  background-size: cover;
+  width: 33%;
+  height: 50%; }
+
+.photo5 {
+  background-image: url("https://scontent.cdninstagram.com/vp/c2c9c46d661c9b4cec72d6fd03d54f1b/5C5215C3/t51.2885-15/sh0.08/e35/p640x640/41326193_314478169105487_8574014531297036148_n.jpg");
+  background-position: center;
+  background-size: cover;
+  width: 33%;
+  height: 50%; }
+
+.photo6 {
+  background-image: url("https://scontent.cdninstagram.com/vp/2dd08600770a4c91a2545abbf2caac6d/5C5A749C/t51.2885-15/sh0.08/e35/p640x640/42401284_297989314354105_835708378917034986_n.jpg");
+  background-position: center;
+  background-size: cover;
+  width: 33%;
+  height: 50%; }
+
+.photo7 {
+  background-image: url("https://scontent.cdninstagram.com/vp/90581ab29b13423aa2904337c579ba0c/5C68559E/t51.2885-15/sh0.08/e35/p640x640/44204468_710020256063736_5479634757086139828_n.jpg");
+  background-position: center;
+  background-size: cover;
+  width: 33%;
+  height: 50%; }
+
+.footer {
+  width: 100vw;
+  padding: 50px 0px;
+  box-sizing: border-box; }
+  .footer .footer-container {
+    padding: 0px 60px; }
+    .footer .footer-container .grid-footer-flex {
+      display: flex;
+      margin: 0px;
+      padding: 0px; }
+      .footer .footer-container .grid-footer-flex .gymshark-central {
+        width: 25%;
+        float: left;
+        padding-left: 30px; }
+        .footer .footer-container .grid-footer-flex .gymshark-central .gymshark-central-center .central-logo-new {
+          text-decoration: none;
+          color: #999; }
+          .footer .footer-container .grid-footer-flex .gymshark-central .gymshark-central-center .central-logo-new .central-text {
+            width: 150px;
+            height: 48.06;
+            margin-bottom: 10px; }
+          .footer .footer-container .grid-footer-flex .gymshark-central .gymshark-central-center .central-logo-new .logo-inner {
+            display: flex;
+            align-items: center;
+            font-size: 16px; }
+            .footer .footer-container .grid-footer-flex .gymshark-central .gymshark-central-center .central-logo-new .logo-inner .shark-logo-inner {
+              width: 50px;
+              height: 50px;
+              margin-right: 5px; }
+            .footer .footer-container .grid-footer-flex .gymshark-central .gymshark-central-center .central-logo-new .logo-inner .click-to-visit {
+              font-size: 1.1rem;
+              text-decoration: none; }
+        .footer .footer-container .grid-footer-flex .gymshark-central .gymshark-central-center .general-nav {
+          margin-bottom: 30px;
+          list-style: none;
+          margin: 0;
+          padding: 0; }
+          .footer .footer-container .grid-footer-flex .gymshark-central .gymshark-central-center .general-nav .gymshark-central-link {
+            text-decoration: none;
+            color: inherit; }
+          .footer .footer-container .grid-footer-flex .gymshark-central .gymshark-central-center .general-nav .about-us-link {
+            text-decoration: none;
+            color: inherit; }
+
+.footer-contact-us-container {
+  width: 17%;
+  float: left;
+  padding-left: 30px; }
+  .footer-contact-us-container .footer-contact-us {
+    list-style: none;
+    line-height: 1.15; }
+    .footer-contact-us-container .footer-contact-us .footer-contact-us-faq {
+      list-style: none;
+      margin: 0px;
+      padding: 0px; }
+      .footer-contact-us-container .footer-contact-us .footer-contact-us-faq .faq-list {
+        list-style: none;
+        margin: 0;
+        padding: 0; }
+        .footer-contact-us-container .footer-contact-us .footer-contact-us-faq .faq-list .faq {
+          text-decoration: none;
+          color: #999; }
+  .footer-contact-us-container .footer-help-container h5 {
+    margin-bottom: 1.4rem; }
+  .footer-contact-us-container .footer-help-container .help-ul-list {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: 30px; }
+    .footer-contact-us-container .footer-help-container .help-ul-list li a {
+      text-decoration: none;
+      color: #999; }
+
+.my-account-and-social-media-container {
+  width: 17%;
+  float: left;
+  padding-left: 30px; }
+  .my-account-and-social-media-container .my-account-container {
+    list-style: none; }
+    .my-account-and-social-media-container .my-account-container .my-account-ul {
+      list-style: none;
+      margin: 0px;
+      padding: 0px; }
+      .my-account-and-social-media-container .my-account-container .my-account-ul li {
+        list-style: none; }
+        .my-account-and-social-media-container .my-account-container .my-account-ul li a {
+          list-style: none;
+          text-decoration: none;
+          color: #999; }
+  .my-account-and-social-media-container .social-media-container .social-media-links {
+    text-align: left; }
+    .my-account-and-social-media-container .social-media-container .social-media-links .social-links a img {
+      width: 24px;
+      height: 24px;
+      margin: 0px 6px; }
+
+.mens-top-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+  .mens-top-container .mens-top-container-center {
+    text-align: center;
+    line-height: 1; }
+
+.mens-all-item-component {
   position: relative;
   margin: 20px 0px;
   display: flex;
@@ -95,197 +445,4 @@ height: 100vh;
   text-align: center;
   line-height: 80%;
   font-size: 11px;
-}
-.frontpage-item-name{
-  font-weight: bold;
-}
-.explore-button{
-  width: 160px;
-  height: 50px;
-  border: none;
-  background-color: white;
-}
-.second-image{
-  background-image: url('https://cdn.shopify.com/s/files/1/0156/6146/files/Homepage_hero_2-min_6b95c665-7068-40a1-baf6-3ef98a5d038c.jpg?v=1538989447');
-  width: 100vw;
-  height: 100vh;
-  background-position: center;
-  background-size: cover;
-}
-.text-over-image2{
-  position: relative;
-  color: white;
-  top: 45%;
-  right: 3%;
-  text-align: right;
-}
-.image2-small-text{
-  font-size: 13px;
-}
-.bold-text-over-image2{
-  font-size: 30px;
-  margin: 0px;
-  font-family: 'Roboto', sans-serif;
-}
-.second-explore-button{
-  width: 160px;
-  height: 50px;
-  border: none;
-  background-color: white;
-}
-.third-and-fourth-images{
-  display: flex;
-  width: 100vw;
-  height: 77vh;
-}
-.third-image{
-  background-image: url('https://cdn.shopify.com/s/files/1/0156/6146/files/Homepage_half_hero_1-min_34a7c80a-713a-4e50-9b56-21b444e41e15_1440x.jpg?v=1538989729');
-  background-position: center; 
-  background-size: cover;
-  width: 50%;
-  height: 100%;
-}
-.text-over-image3{
-  position: relative;
-  text-align: right;
-  font-weight: bold;
-  font-size: 30px;
-  line-height: 20px;
-  top: 40%;
-  right: 5%;
-}
-.explore-mens{
-  width: 160px;
-  height: 50px;
-  background-color: black;
-  color: white;
-  border: none;
-}
-.fourth-image{
-  background-image: url('https://cdn.shopify.com/s/files/1/0156/6146/files/Homepage_half_hero_2-min_1440x.jpg?v=1538989744');
-  background-position: center;
-  background-size: cover;
-  width: 50%;
-  height: 100%
-}
-.text-over-image4{
-  position: relative;
-  top: 40%;
-  left: 5%;
-  font-weight: bold;
-  font-size: 30px;
-  line-height: 20px
-}
-.explore-womens{
-  width: 160px;
-  height: 50px;
-  background-color: black;
-  color: white;
-  border: none;
-}
-.fifth-image{
-  background-image: url('https://cdn.shopify.com/s/files/1/0156/6146/files/Homepage_hero_3-min_60c90802-911a-4655-937e-e9510bc639a0.jpg?v=1538989835');
-  background-position: center;
-  background-size: cover;
-  height: 100vh;
-  width: 100vw;
-}
-.text-over-image5{
-  position: relative;
-  top: 42%; 
-  left: 3%;
-}
-.student{
-  font-size: 30px;
-  margin: 0px;
-  font-family: 'Roboto', sans-serif;
-}
-.discount{
-  font-size: 30px;
-  margin: 0px;
-  font-family: 'Roboto', sans-serif;
-}
-.discount-explanation{
-  line-height: 0;
-  font-size: 13px
-}
-.read-more-button{
-  width: 160px;
-  height: 50px;
-  background-color: black;
-  color: white;
-  border: none;
-}
-.shop-instagram{
-  height: 60px;
-  width: 100vw;
-}
-.shop-instagram-text{
-  font-size: 50px;
-  line-height: 0px;
-  text-align: left;
-}
-.shop-instagram-photos{
-  width: 100vw;
-  height: 79vh;
-  display: flex;
-}
-.container1{
-width: 40%;
-height: 100%
-}
-.photo1{
-  background-image: url('https://scontent.cdninstagram.com/vp/f7f7b6b7b78ea6f9fbfe992f8d648616/5C66499F/t51.2885-15/sh0.08/e35/p640x640/42893749_242951423050332_6805739268140742933_n.jpg');
-  background-position: center;
-  background-size: cover;
-  width: 100%;
-  height: 100%;
-}
-.container2{
-  display: flex;
-  flex-wrap: wrap;
-  width: 60%;
-  height: 100%;
-}
-.photo2{
-  background-image: url('https://scontent.cdninstagram.com/vp/c7773b310b35b6451134f9d2cf3925fe/5C536698/t51.2885-15/sh0.08/e35/p640x640/43915392_340781143345895_3323663266761805928_n.jpg');
-  background-position: center;
-  background-size: cover;
-  width: 33%;
-  height: 50%;
-}
-.photo3{
-  background-image: url('https://scontent.cdninstagram.com/vp/1300bb52a6fcd48fa5e298a40422507a/5C5A944A/t51.2885-15/sh0.08/e35/p640x640/43779274_589158944836352_6795270115839594390_n.jpg');
-  background-position: center;
-  background-size: cover;
-  width: 33%;
-  height: 50%;
-}
-.photo4{
-  background-image: url('https://scontent.cdninstagram.com/vp/fefce65592674970664d576edccd426c/5C6600DF/t51.2885-15/sh0.08/e35/p640x640/43063025_154565878822575_6360210028140894310_n.jpg');
-  background-position: center;
-  background-size: cover;
-  width: 33%;
-  height: 50%;
-}
-.photo5{
-  background-image: url('https://scontent.cdninstagram.com/vp/c2c9c46d661c9b4cec72d6fd03d54f1b/5C5215C3/t51.2885-15/sh0.08/e35/p640x640/41326193_314478169105487_8574014531297036148_n.jpg');
-  background-position: center;
-  background-size: cover;
-  width: 33%;
-  height: 50%;
-}
-.photo6{
-  background-image: url('https://scontent.cdninstagram.com/vp/2dd08600770a4c91a2545abbf2caac6d/5C5A749C/t51.2885-15/sh0.08/e35/p640x640/42401284_297989314354105_835708378917034986_n.jpg');
-  background-position: center;
-  background-size: cover;
-  width: 33%;
-  height: 50%;
-}
-.photo7{
-  background-image: url('https://scontent.cdninstagram.com/vp/2dd08600770a4c91a2545abbf2caac6d/5C5A749C/t51.2885-15/sh0.08/e35/p640x640/42401284_297989314354105_835708378917034986_n.jpg');
-  background-position: center;
-  background-size: cover;
-  width: 33%;
-  height: 50%;
-}
+  width: 60vw; }

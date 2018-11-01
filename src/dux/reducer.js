@@ -1,5 +1,5 @@
 const intialState = {
-    cart: ['hi','two',{item:1}]
+    cart: []
 }
 
 const UPDATE_CART = 'UPDATE_CART'
@@ -15,7 +15,7 @@ export default function Reducer(state = intialState,action){
     switch (action.type) {
         case UPDATE_CART:
             return Object.assign({}, state, { 
-                cart: action.item
+                cart: [...state.cart,action.payload]
             })
         default:
             return state;
