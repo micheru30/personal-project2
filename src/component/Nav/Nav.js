@@ -11,7 +11,6 @@ class Nav extends Component {
     }
     componentDidMount() {
         axios.get('/api/items').then(res => this.setState({ items: res.data }))
-        axios.get('/api/user').then(console.log)
     }
     handleAddToCart(item) {
         this.props.updateCart(item)
@@ -25,6 +24,9 @@ class Nav extends Component {
     }
 
     render() {
+       let cartQuantity = this.props.cart.reduce((acc,item)=>{
+           return acc+item.quantity           
+       },0)
         return (
             <div className='nav'>
                 <div className='top-nav'>
@@ -59,13 +61,15 @@ class Nav extends Component {
                         <img className='search-icon' src='https://static.thenounproject.com/png/14173-200.png' alt='Search Icon' />
                         <img onClick={this.login} className='account-icon' src='https://www.shareicon.net/download/2015/09/17/102318_man_512x512.png' alt='Account' />
                         <div className='nav-cart-contents'>
-                            <img className='cart-icon' src='https://static.thenounproject.com/png/28589-200.png' alt='Shopping Bag' />
+                            <a href="/#/cart">
+                                <img className='cart-icon' src='https://static.thenounproject.com/png/28589-200.png' alt='Shopping Bag' />
+                            </a>
                         </div>
-                        <div className='cart-counter'>{this.props.cart.length}</div>
+                        <div className='cart-counter'>{cartQuantity}</div>
                     </div>
                 </div>
                 <div className='header'>
-                    <div className='notifications'>Notifications</div>
+                    <div className='notifications'>Free Shipping On Purchases over $75 USD</div>
                 </div>
             </div>
         )

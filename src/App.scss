@@ -477,11 +477,108 @@
   position: relative;
   margin: 20px 0px;
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
+  flex-direction: column;
   text-align: center;
   line-height: 80%;
   font-size: 11px;
-  width: 60vw;
+  .mens-product-image{
+    width: 33%
+  }
+}
+.cart{
+  width: 100vw;
+}
+.quantity-update{
+  align-items: center;
+  height: 100%;
+}
+.quantity-and-subtotal{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.increase-decrease-quantity{
+  display: flex;
+  flex-direction: row;
+}
+.increase-button{
+  width: 30px
+}
+.quantity {
+  width: 90px;
+  text-align: center;
+  border: black solid 1px;
+}
+.decrease-button{
+  width: 30px
+}
+.quantity-and-subtotal-container2{
+  display: flex;
+  width: 19%;
+  justify-content: space-around;
+}
+.cart-item-container{
+  width: 100vw;
+}
+.cart-item-component{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border: black solid 1px;
+  align-items: center;
+}
+.cart-image-and-name{
+  display: flex;
+  flex-direction: row;
+  height: 10%;
+  width: 30%
+}
+.quantity-and-subtotal-container{
+  display: flex;
+  justify-content: space-around;
+  width: 23%;
+  align-items: center;
+}
+.cart-product-image{
+  height: 200px;
+  width: auto;
+}
+.cart-item-info{
+  line-height: 5px
+}
+.remove-from-cart{
+  height: 25px;
+  width: 152px;
+}
+.quantity-update{
+  display: flex;
+  flex-direction: column;
+}
+.subtotal-container{
+  align-content: center;
+}
+.final-total{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100vw;
+}
+.final-total-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 20%
+}
+.checkout{
+  position: relative;
+  width: 100%; 
+  left: 83%;
+}
+.customer-info{
+  display: flex;
+  flex-direction: column;
+}
+.confirmation{
+  text-align: center;
 }

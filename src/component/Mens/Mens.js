@@ -13,13 +13,23 @@ class Mens extends Component {
     }
     componentDidMount() {
         axios.get('/api/items').then(res => this.setState({ items: res.data }))
-        axios.get('/api/user').then(console.log)
+        axios.get('/api/user')
+        axios.get('/api/cart').then(res => res.data.map((item, i) => {
+            if (!this.props.cart[i]) {
+                this.props.updateCart(item)
+            }
+        }))
     }
     handleAddToCart(item) {
-        this.props.updateCart(item)
-    }
+        axios.post('/api/cart', item).then(res =>
+          res.data.map((item,i) => {
+            if (!this.props.cart[i]) {
+              this.props.updateCart(item)
+            }
+          }
+          )
+        )}
     render() {
-        console.log(this.state.items)
         return (
             <div className='Home'>
                 <div className='mens-top-container'>
@@ -35,11 +45,11 @@ class Mens extends Component {
                     {this.state.items.map((item, i) => {
                         return (
                             <div className='mens-item-component' key={i}>
-                                    <img className='mens-product-image' src={item.item_image} alt='image1' />
-                                    <p className='frontpage-item-name'>{item.item_name}</p>
-                                    <p>{item.item_color}</p>
-                                    <p>${item.item_price}.00 USD</p>
-                                    <button onClick={() => this.handleAddToCart(item)}>Add To Cart</button>
+                                <img className='mens-product-image' src={item.item_image} alt='image1' />
+                                <p className='frontpage-item-name'>{item.item_name}</p>
+                                <p>{item.item_color}</p>
+                                <p>${item.item_price}.00 USD</p>
+                                <button onClick={() => this.handleAddToCart(item)}>Add To Cart</button>
                             </div>
                         )
                     })}

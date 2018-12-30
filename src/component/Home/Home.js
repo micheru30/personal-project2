@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { updateCart } from '../../dux/reducer';
+import { updateCart, updateQuantity } from '../../dux/reducer';
 
 
 class Home extends Component {
@@ -13,13 +13,19 @@ class Home extends Component {
   }
   componentDidMount() {
     axios.get('/api/items').then(res => this.setState({ items: res.data }))
-    axios.get('/api/user').then(console.log)
+    axios.get('/api/cart').then(res => res.data.map((item, i) => {
+      if (!this.props.cart[i]) {
+        this.props.updateCart(item)
+      }
+    }))
   }
   handleAddToCart(item) {
-    this.props.updateCart(item)
-  }
+    axios.post('/api/cart', item).then(res =>{
+      this.props.updateQuantity(res.data)
+    }
+    )}
   render() {
-    console.log(this.state.items)
+    console.log(this.props.cart)
     return (
       <div className='Home'>
         <div className='landing-image'>
@@ -57,7 +63,9 @@ class Home extends Component {
             <div className="text-over-image3">
               <p className='shop-mens-line1'>SHOP</p>
               <p className='shop-means-line2'>MEN'S</p>
-              <button className='explore-mens'>EXPLORE</button>
+              <a href='/#/mens'>
+                <button className='explore-mens'>EXPLORE</button>
+                </a>
             </div>
           </div>
           <div className='fourth-image'>
@@ -107,4 +115,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { updateCart })(Home)
+export default connect(mapStateToProps, { updateCart, updateQuantity })(Home)
