@@ -25,7 +25,7 @@ class Checkout extends Component {
             customerName: res.data.customer_name,
             customerID: res.data.customer_id
         }))
-        axios.get('/api/cart').then(res => res.data.map((item, i) => {
+        axios.get('/api/cart').then(res => res.data.forEach((item, i) => {
             if (!this.props.cart[i]) {
                 this.props.updateCart(item)
             }
@@ -43,40 +43,33 @@ class Checkout extends Component {
             [e.target.name]: e.target.value
         })
     }
+    handleConfirmationPage() {
+        window.location.href = '/#/confirmation'
+    }
     handleCustomerInfoUpdate() {
         const { customerID, addressLine1, addressLine2, city, state, zipCode, phone } = this.state;
         let order_id = Date.now() + Math.random().toString().slice(2);
-        let date = new Date();
-        let month = date.getMonth();
-        let day = date.getDate();
-        let year = date.getFullYear();
-        let order_date = `${month}-${day}-${year}`
-        axios.put('api/user', { customerID, addressLine1, addressLine2, city, state, zipCode, phone }).then((user) => {
-            console.log(user.data)
+        let order_date = new Date();
+        axios.put('/api/user', { customerID, addressLine1, addressLine2, city, state, zipCode, phone })
+        this.props.cart.forEach(item => {
+            const { item_id, quantity } = item
+            axios.post('/api/order', { order_id, customerID, item_id, quantity, order_date })
         })
-        this.props.cart.map(item=>{
-            const {item_id,quantity} = item
-            axios.post('/api/order',{order_id, customerID, item_id, quantity, order_date}).then(res=>{
-                console.log(res.data)
-                window.location.href = '/#/confirmation'
-            })
-        })
+        this.handleConfirmationPage()
     }
     render() {
-        let finalTotal = this.props.cart.reduce((acc, item) => {
-            return acc + item.quantity * item.item_price
-        }, 0)
-        console.log(this.props.cart)
         return (
             <div className='checkout-page'>
                 <div>
-                    <h1>Customer Name</h1>
-                    <div className='customer-name-container'>
-                        <h3>
-                            {this.state.customerName}
-                        </h3>
+                    <div className='checkout-top'>
+                        <h1>Customer Name</h1>
+                        <div className='customer-name-container'>
+                            <h3>
+                                {this.state.customerName}
+                            </h3>
+                        </div>
+                        <h1>Shipping Address</h1>
                     </div>
-                    <h1>Shipping Address</h1>
                     <div className='customer-info'>
                         <input name={'addressLine1'} onChange={(e) => this.handleChange(e)} placeholder='Address line 1' className='address-line1' />
                         <input name={'addressLine2'} onChange={(e) => this.handleChange(e)} placeholder='Address line 2' className='address-line2' />

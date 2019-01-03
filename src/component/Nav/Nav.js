@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios'
+
 
 class Nav extends Component {
     constructor() {
@@ -9,12 +9,7 @@ class Nav extends Component {
             items: [],
         }
     }
-    componentDidMount() {
-        axios.get('/api/items').then(res => this.setState({ items: res.data }))
-    }
-    handleAddToCart(item) {
-        this.props.updateCart(item)
-    }
+    
     login() {
         let { REACT_APP_DOMAIN, REACT_APP_CLIENT_ID } = process.env;
 
@@ -31,25 +26,25 @@ class Nav extends Component {
             <div className='nav'>
                 <div className='top-nav'>
                     <a href='/#/'>
-                        <img className='logo' src='https://cdn.shopify.com/s/files/1/0156/6146/t/106/assets/logo.svg?14217673215767397487' alt='Logo' />
+                        <img className='logo' src='https://cdn.shopify.com/s/files/1/0156/6146/t/115/assets/logo.svg?15444016502647805719' alt='Logo' />
                     </a>
                     <div className='nav-categories'>
                         <div className='dropdown'>
                             <ul className='clothing-nav'>
                                 <div className='mens-clothing-list'>
-                                    <a>Mens</a>
-                                    <a href='/#/mens'>All Products</a>
-                                    <a href='/#/'>Tops</a>
-                                    <a href='/#/'>Bottoms</a>
+                                    <div>Mens</div>
+                                    <a href='/#/clothes/male/all'>All Products</a>
+                                    <a href='/#/clothes/male/tops'>Tops</a>
+                                    <a href='/#/clothes/male/bottoms'>Bottoms</a>
                                 </div>
                                 <div className='womens-clothing-list'>
-                                    <a>Womens</a>
-                                    <a href='/#/'>All Products</a>
-                                    <a href='/#/'>Tops</a>
-                                    <a href='/#/'>Bottoms</a>
+                                    <div>Womens</div>
+                                    <a href='/#/clothes/female/all'>All Products</a>
+                                    <a href='/#/clothes/female/tops'>Tops</a>
+                                    <a href='/#/clothes/female/bottoms'>Bottoms</a>
                                 </div>
                                 <div className='accessories'>
-                                    <a>
+                                    <a href='/#/accessories' className="accessories-link">
                                         Accessories
                                     </a>
                                 </div>
@@ -57,8 +52,6 @@ class Nav extends Component {
                         </div>
                     </div>
                     <div className='nav-icons'>
-                        <input className='search-input' placeholder='SEARCH'></input>
-                        <img className='search-icon' src='https://static.thenounproject.com/png/14173-200.png' alt='Search Icon' />
                         <img onClick={this.login} className='account-icon' src='https://www.shareicon.net/download/2015/09/17/102318_man_512x512.png' alt='Account' />
                         <div className='nav-cart-contents'>
                             <a href="/#/cart">

@@ -43,8 +43,6 @@ app.use(session({
 //     }
 // })
 
-// app.use(cors());
-
 app.get('/auth/callback', async (req, res) => {
 
     let payload = {
@@ -95,6 +93,7 @@ app.get('/api/items', (req, res) => {
 })
 
 app.post('/api/cart', (req, res) => {
+    console.log('adding to cart')
     if (req.session.cart) {
         const index = req.session.cart.findIndex(item => item.item_id === req.body.item_id)
         if (index >= 0) { req.session.cart[index].quantity++ } else {
@@ -110,7 +109,7 @@ app.post('/api/cart', (req, res) => {
     }
 })
 
-app.get('/api/cart', (req, res) => {
+app.get('/api/cart', (req, res) => {        
     if (req.session.cart) {
         res.status(200).send(req.session.cart)
     }
@@ -139,19 +138,26 @@ app.put('/api/cart', (req, res) => {
 
 app.put('/api/user', (req, res) => {
     const { customerID, addressLine1, addressLine2, city, state, zipCode, phone } = req.body;
+    req.session.user.customer_addresss_line_1 = addressLine1
+    req.session.user.customer_addresss_line_2 = addressLine2
+    req.session.user.customer_city = city
+    req.session.user.customer_state = state
+    req.session.user.customer_zipcode = zipCode
+    req.session.user.customer_phone = phone
     const db = app.get('db');
     db.update_customer([customerID, addressLine1, addressLine2, city, state, zipCode, phone])
-        .then(user => res.send(user))
+        .then(customer=> res.status(200).send(customer))
         .catch(err => {
             res.status(500).send({ errorMessage: 'Something went wrong' })
             console.log(err)
         })
 })
 
-app.delete('/api/cart', (req, res) => {
+app.delete('/api/deletecart', (req, res) => {
+    console.log('deleteing cart')
     if (req.session.cart) {
         req.session.cart = []
-        res.status(200).send(req.session.cart)
+        res.sendStatus(200)
     }
 })
 
@@ -166,18 +172,47 @@ app.post('/api/order', (req, res) => {
             console.log(err)
         })
 })
-
-app.get('/api/confirmation/', (req, res) => {
+app.get('/api/items/:gender',(req,res)=> {
+    const {gender} = req.params
+    const db = app.get('db');
+    db.get_items_gender([gender]).then(items =>{
+        res.status(200).send(items)
+    })
+    .catch(err => {
+        res.status(500).send({ errorMessage: 'Something went wrong' })
+        console.log(err)
+    })
+})
+app.get('/api/accessories',(req,res)=> {
+    const db = app.get('db');
+    db.get_accessories().then(items =>{
+        res.status(200).send(items)
+    })
+    .catch(err => {
+        res.status(500).send({ errorMessage: 'Something went wrong' })
+        console.log(err)
+    })
+})
+app.get('/api/getorder',(req,res)=> {
+    const db = app.get('db');
+    db.get_order([req.session.user.lastOrder]).then(items =>{
+        res.status(200).send(items)
+    })
+    .catch(err => {
+        res.status(500).send({ errorMessage: 'Something went wrong' })
+        console.log(err)
+    })
+})
+app.get('/api/confirmation',(req,res)=> {
     const db = app.get('db');
     console.log(req.session.user.lastOrder)
-    db.get_confirmation([req.session.user.lastOrder])
-        .then(order => {
-            console.log(order)
-            res.status(200).send(order)})
-        .catch(err => {
-            res.status(500).send({ errorMessage: 'Something went wrong' })
-            console.log(err)
-        })
+    db.get_confirmation([req.session.user.lastOrder]).then(items =>{
+        res.status(200).send(items)
+    })
+    .catch(err => {
+        res.status(500).send({ errorMessage: 'Something went wrong' })
+        console.log(err)
+    })
 })
 
 app.listen(SERVER_PORT, () => console.log(`Listening on port: ${SERVER_PORT}`))

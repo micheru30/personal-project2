@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 
 class Footer extends Component {
+    login() {
+        let { REACT_APP_DOMAIN, REACT_APP_CLIENT_ID } = process.env;
+
+        let uri = `${encodeURIComponent(window.location.origin)}/auth/callback`
+
+        window.location = `https://${REACT_APP_DOMAIN}/authorize?client_id=${REACT_APP_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${uri}&response_type=code`
+    }
     render() {
         return (
             <div className="footer">
@@ -10,10 +17,10 @@ class Footer extends Component {
                             <div className='gymshark-central-center'>
                                 <a className='central-logo-new' href='https://www.gymshark.com/blogs/news/'>
                                     <div className='central-text'>
-                                        <img alt='gymshark central' src='https://cdn.shopify.com/s/files/1/0156/6146/t/107/assets/gymshark-central.svg?7311842748552632210' />
+                                        <img alt='gymshark central' src='https://cdn.shopify.com/s/files/1/0156/6146/t/115/assets/gymshark-central.svg?15444016502647805719' />
                                     </div>
                                     <div className='logo-inner'>
-                                        <img alt='gymshark logo' className='shark-logo-inner' src='https://cdn.shopify.com/s/files/1/0156/6146/t/107/assets/logo-grey.svg?7311842748552632210' />
+                                        <img alt='gymshark logo' className='shark-logo-inner' src='https://cdn.shopify.com/s/files/1/0156/6146/t/115/assets/logo-grey.svg?15444016502647805719' />
                                         <p>Click to visit</p>
                                     </div>
                                 </a>
@@ -46,8 +53,7 @@ class Footer extends Component {
                             <div className='my-account-container'>
                                 <h5>MY ACCOUNT</h5>
                                 <ul className='my-account-ul'>
-                                    <li><a href=''>Login</a></li>
-                                    <li><a href=''>Register</a></li>
+                                    <li onClick={this.login}>Login</li>
                                 </ul>
                             </div>
                             <div className='social-media-container'>

@@ -9,39 +9,45 @@ class Checkout extends Component {
     constructor() {
         super();
         this.state = {
-           customerInfo: '',
-           confirmation: []
+            customerInfo: {},
+            confirmation: []
         }
     }
     componentDidMount() {
-        axios.get('/api/user').then(res => this.setState({
-            customerInfo: res.data
-        }))
-        axios.get('/api/cart').then(res => res.data.map((item, i) => {
-            if (!this.props.cart[i]) {
-                this.props.updateCart(item)
-            }
-        }))
-        axios.get(`/api/confirmation/`).then(res => this.setState({
-            confirmation: res.data
-        }))
+        setTimeout(() => {
+            axios.get('/api/user').then(res => {
+                this.setState({ customerInfo: res.data })
+            })
+            axios.get('/api/confirmation').then(res=>this.setState({confirmation: res.data})).then(axios.delete('/api/deletecart'))
+            axios.get('/api/cart').then(res => {
+                res.data.forEach((item, i) => {
+                if (!this.props.cart[i]) {
+                    this.props.updateCart(item)
+                }
+            })})
+        }, 500);
+        this.props.deleteItemFromCart([])
+    }
+    handleContinueShopping(){
+        window.location.href = '/#/'
     }
     render() {
-        let finalTotal = this.props.cart.reduce((acc, item) => {
+        console.log(this.state.confirmation)
+        let finalTotal = this.state.confirmation.reduce((acc, item) => {
             return acc + item.quantity * item.item_price
         }, 0)
-        console.log(this.state.confirmation)
+        let confirmationSentence = `${this.state.customerInfo.customer_name} your order has been processed and is being shipped to ${this.state.customerInfo.customer_addresss_line_1} ${this.state.customerInfo.customer_addresss_line_2}, ${this.state.customerInfo.customer_city}, ${this.state.customerInfo.customer_state}, ${this.state.customerInfo.customer_zipcode}`
         return (
             <div className='Cart'>
                 <div className='quantity-and-subtotal'>
-                    <div><h4>ITEM</h4></div>
+                    <h4>CONFIRMATION #: {this.state.customerInfo.lastOrder}</h4>
                     <div className='quantity-and-subtotal-container2'>
                         <h4>QUANTITY</h4>
                         <h4>SUBTOTAL</h4>
                     </div>
                 </div>
                 <div className='item-displayed-in-cart'>
-                    {this.props.cart.map((item, i) => {
+                    {this.state.confirmation.map((item, i) => {
                         return (
                             <div className='cart-item-container' key={i}>
                                 <div className='cart-item-component'>
@@ -72,14 +78,16 @@ class Checkout extends Component {
                     })}
                 </div>
                 <div className='final-total'>
-                    <a href='/#/'>Continue Shopping</a>
+                    <button className='confirmation-continue-shopping' onClick={this.handleContinueShopping}>Continue Shopping</button>
                     <div className='final-total-container'>
                         <h1 className='total'>TOTAL:</h1>
                         <div>${finalTotal}.00 USD</div>
                     </div>
                 </div>
                 <div className='confirmation'>
-                <h4>Shipment has been place and is being sent to 231 W Hidden Hollow Dr, Orem, UT, 84058</h4>
+                <h3>
+                {confirmationSentence}
+                </h3>
                 </div>
             </div>
         )

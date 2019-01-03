@@ -75,7 +75,7 @@
 .nav-icons{
   display: flex;
   align-items: center;
-  padding-right: 50px
+  padding-right: 50px;
 }
 .search-input{
   border: none;
@@ -438,6 +438,7 @@
             list-style: none;
             margin: 0px;
             padding: 0px;
+            color: #999;
             li{
                 list-style: none;
                 a{
@@ -485,7 +486,7 @@
     width: 33%
   }
 }
-.cart{
+.Cart{
   width: 100vw;
 }
 .quantity-update{
@@ -544,7 +545,10 @@
   width: auto;
 }
 .cart-item-info{
-  line-height: 5px
+  line-height: 5px;
+}
+.cart-item-name{
+  width: 800px
 }
 .remove-from-cart{
   height: 25px;
@@ -561,6 +565,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   width: 100vw;
 }
 .final-total-container{
@@ -578,7 +583,42 @@
 .customer-info{
   display: flex;
   flex-direction: column;
+  width: 50vw;
+  margin: 0px 25%;
 }
 .confirmation{
   text-align: center;
+}
+.continue-shopping-cart{
+  text-decoration: none;
+  color: inherit 
+}
+.mens-all-item-component{
+  display: inline;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap
+}
+.mens-item-component{
+  width: 33%;
+  margin: 20px 0px;
+}
+.checkout-top{
+  text-align: center
+}
+.confirmation-continue-shopping{
+  height: 25px;
+}
+.cart-is-empty{
+  width: 100vw;
+  margin: 100px 0px;
+  text-align: center;
+}
+.accessories-link{
+  text-decoration: none;
+  color: inherit;
+}
+.nav-categories{
+  margin-right: 170px
 }
