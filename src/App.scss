@@ -622,3 +622,28 @@
 .nav-categories{
   margin-right: 170px
 }
+.customer-image{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.customer-container{
+  position: absolute;
+  left: 70%;
+  display: flex;
+  align-items: center;
+  width: 300px;
+}
+.user-menu-container{
+  position: absolute;
+  left: 70%;
+  top: 90%;
+  animation: fadein 2s;
+}
+.logout-button{
+  background: white;
+  width: 300px;
+  border: solid black;
+  text-align: center;
+}

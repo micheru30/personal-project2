@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
+
 
 
 class Nav extends Component {
@@ -7,21 +9,46 @@ class Nav extends Component {
         super();
         this.state = {
             items: [],
+            user: {},
+            userMenuToggle: false
         }
     }
-    
+    componentDidMount() {
+        axios.get('/api/user').then(res => this.setState({ user: res.data }))
+    }
+
     login() {
-        let { REACT_APP_DOMAIN, REACT_APP_CLIENT_ID } = process.env;
+        let { REACT_APP_DOMAIN, REACT_APP_CLIENT_ID } = process.env
 
         let uri = `${encodeURIComponent(window.location.origin)}/auth/callback`
 
         window.location = `https://${REACT_APP_DOMAIN}/authorize?client_id=${REACT_APP_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${uri}&response_type=code`
     }
 
+    toggleUserMenu = () => {
+        this.setState(prevState => ({ userMenuToggle: !prevState.userMenuToggle }))
+        setTimeout(() => {
+            this.setState(prevState => ({ userMenuToggle: !prevState.userMenuToggle }))
+        }, 3000);
+    }
+
+    signOut = () => {
+        axios.post('/api/auth/signout').then(res => {
+            console.log('Sign Out Successful')
+            window.location.reload()
+        })
+    }
     render() {
-       let cartQuantity = this.props.cart.reduce((acc,item)=>{
-           return acc+item.quantity           
-       },0)
+        const { user, userMenuToggle } = this.state
+        let cartQuantity = this.props.cart.reduce((acc, item) => {
+            return acc + item.quantity
+        }, 0)
+        let userMenu = ''
+        if (userMenuToggle) {
+            userMenu = <div className='user-menu-container'>
+                <button className='logout-button' onClick={this.signOut}>SignOut</button>
+            </div>
+        }
         return (
             <div className='nav'>
                 <div className='top-nav'>
@@ -51,6 +78,16 @@ class Nav extends Component {
                             </ul>
                         </div>
                     </div>
+                    {
+                        !user.customer_name ?
+                            ''
+                            :
+                            <div onClick={this.toggleUserMenu} className='customer-container'>
+                                <img className='customer-image' src={user.customer_picture} alt='user' />
+                                {user.customer_name}
+                            </div>
+                    }
+                    {userMenu}
                     <div className='nav-icons'>
                         <img onClick={this.login} className='account-icon' src='https://www.shareicon.net/download/2015/09/17/102318_man_512x512.png' alt='Account' />
                         <div className='nav-cart-contents'>

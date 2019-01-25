@@ -25,7 +25,7 @@ class Checkout extends Component {
                     this.props.updateCart(item)
                 }
             })})
-        }, 500);
+        }, 1000);
         this.props.deleteItemFromCart([])
     }
     handleContinueShopping(){

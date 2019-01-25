@@ -3,7 +3,6 @@ const express = require('express');
 const session = require('express-session');
 const axios = require('axios');
 const massive = require('massive');
-const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -17,7 +16,7 @@ const {
     CLIENT_SECRET,
     CONNECTION_STRING,
     SECRET,
-    AUTH_PROTOCAL
+    AUTH_PROTOCOL
 } = process.env;
 
 massive(CONNECTION_STRING).then(db => app.set('db', db))
@@ -31,18 +30,6 @@ app.use(session({
     cookie: { maxAge: 99999 }
 }))
 
-
-// app.use( async (req, res, next) => {
-//     if (process.env.NODE_ENV) {
-//         const db = req.app.get('db');
-//         let user = await db.session_user();
-//         req.session.user = user[0];
-//         res.status(200).send(req.session.user);
-//     } else {
-//         next()
-//     }
-// })
-
 app.get('/auth/callback', async (req, res) => {
 
     let payload = {
@@ -50,9 +37,8 @@ app.get('/auth/callback', async (req, res) => {
         client_secret: CLIENT_SECRET,
         code: req.query.code,
         grant_type: 'authorization_code',
-        redirect_uri: `${AUTH_PROTOCAL}://${req.headers.host}/auth/callback`
+        redirect_uri: `${AUTH_PROTOCOL}://${req.headers.host}/auth/callback`
     }
-
 
     // auth0 sending code in req.query.code
     let tokenRes = await axios.post(`https://${REACT_APP_DOMAIN}/oauth/token`, payload)
@@ -93,7 +79,6 @@ app.get('/api/items', (req, res) => {
 })
 
 app.post('/api/cart', (req, res) => {
-    console.log('adding to cart')
     if (req.session.cart) {
         const index = req.session.cart.findIndex(item => item.item_id === req.body.item_id)
         if (index >= 0) { req.session.cart[index].quantity++ } else {
@@ -154,7 +139,6 @@ app.put('/api/user', (req, res) => {
 })
 
 app.delete('/api/deletecart', (req, res) => {
-    console.log('deleteing cart')
     if (req.session.cart) {
         req.session.cart = []
         res.sendStatus(200)
@@ -205,7 +189,6 @@ app.get('/api/getorder',(req,res)=> {
 })
 app.get('/api/confirmation',(req,res)=> {
     const db = app.get('db');
-    console.log(req.session.user.lastOrder)
     db.get_confirmation([req.session.user.lastOrder]).then(items =>{
         res.status(200).send(items)
     })
@@ -213,6 +196,10 @@ app.get('/api/confirmation',(req,res)=> {
         res.status(500).send({ errorMessage: 'Something went wrong' })
         console.log(err)
     })
+})
+app.post('/api/auth/signout',(req,res)=>{
+    req.session.destroy()
+    res.sendStatus(200)
 })
 
 app.listen(SERVER_PORT, () => console.log(`Listening on port: ${SERVER_PORT}`))
